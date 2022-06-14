@@ -92,6 +92,14 @@ public class ParkingController implements Initializable {
         this.colApellido.setCellValueFactory(new PropertyValueFactory("apellido"));
         this.colPlaza.setCellValueFactory(new PropertyValueFactory("plaza"));
         this.colMatricula.setCellValueFactory(new PropertyValueFactory("matricula"));
+        
+        // Creo dos clientes por defecto
+            Cliente c1 = new Cliente("Juan", "Serrano", 1, "8363JJL");
+            Cliente c2= new Cliente("Jose", "Vargas", 2, "1063SSL");
+            this.clientes.add(c1);
+            this.clientes.add(c2);
+            this.tbClientes.setItems(clientes);
+
     }   
     
     @FXML
@@ -108,25 +116,13 @@ public class ParkingController implements Initializable {
             Cliente p = new Cliente(nombre, apellidos, plaza, matricula);
 
             // Compruebo si el cliente esta en el lista
-            if (!this.clientes.contains(p)) {
+           
                 // Lo añado a la lista
                 this.clientes.add(p);
                 // Seteo los items
                 this.tbClientes.setItems(clientes);
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setTitle("Info");
-                alert.setContentText("Persona añadida");
-                alert.showAndWait();
-            } else {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setTitle("Error");
-                alert.setContentText("La persona existe");
-                alert.showAndWait();
-            }
+           
         } catch (NumberFormatException e) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -177,9 +173,7 @@ public class ParkingController implements Initializable {
                 // Creo una persona
                 Cliente aux = new Cliente(nombre, apellidos, plaza, matricula);
 
-                // Compruebo si la persona esta en el lista
-                if (!this.clientes.contains(aux)) {
-
+               
                     // Modifico el objeto
                     p.setNombre(aux.getNombre());
                     p.setApellido(aux.getApellido());
@@ -188,21 +182,7 @@ public class ParkingController implements Initializable {
 
                     // Refresco la tabla
                     this.tbClientes.refresh();
-
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText(null);
-                    alert.setTitle("Info");
-                    alert.setContentText("Persona modificada");
-                    alert.showAndWait();
-
-                } else {
-
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setTitle("Error");
-                    alert.setContentText("La persona existe");
-                    alert.showAndWait();
-                }
+                
             } catch (NumberFormatException e) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
