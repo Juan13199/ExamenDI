@@ -25,6 +25,8 @@ public class App extends Application {
         
         //Indicamos la localizacion de nuestra vista fxml
         loader.setLocation(getClass().getResource("Parking.fxml"));
+         String css = this.getClass().getResource("css/css.css").toExternalForm();
+        
         //Indicamos el lugar donde se encuentra nuestro 
         //bundle.properties predeterminado
         loader.setResources(ResourceBundle.getBundle("com.mycompany.examendi.bundle.bundle"));
@@ -39,7 +41,7 @@ public class App extends Application {
         
         //Seleccionamos la ventana y sus medidas
         scene = new Scene(root, 800, 500);
-        
+        scene.getStylesheets().add(css);
          //Mostramos la vista
         stage.setScene(scene);
         stage.show();

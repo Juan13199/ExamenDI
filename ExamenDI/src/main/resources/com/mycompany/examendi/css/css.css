@@ -1,0 +1,72 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 14 jun 2022, 20:28:15
+    Author     : casqu
+*/
+
+#nombre {
+     -fx-background-color: #5C6699;
+     -fx-text-fill: white;
+      -fx-font-family: "Sarai";
+ }
+ 
+ #apellido {
+     -fx-background-color: #5C6699;
+     -fx-text-fill: white;
+      -fx-font-family: "Sarai";
+ }
+ 
+ #plaza {
+      -fx-background-color: #5C6699;
+     -fx-text-fill: white;
+      -fx-font-family: "Sarai";
+     
+ }
+ #matricula{
+      -fx-background-color: #5C6699;
+     -fx-text-fill: white;
+      -fx-font-family: "Sarai";
+ }
+ 
+ #btnAgregar{
+     -fx-background-color: #E6FD74;
+         -fx-border-color: #FFFFFF;
+         -fx-border-width: 2;
+         -fx-text-fill: #FF3399;
+         -fx-font-family: "Georgia";
+         -fx-font-style: italic;
+         -fx-font-size: 15px;
+         -fx-background-radius: 10 10 10 10;
+         -fx-border-radius: 10 10 10 10;
+     
+ }
+ #btnModificar{
+      -fx-background-color: #E6FD74;
+         -fx-border-color: #FFFFFF;
+         -fx-border-width: 2;
+         -fx-text-fill: #FF3399;
+         -fx-font-family: "Georgia";
+         -fx-font-style: italic;
+         -fx-font-size: 15px;
+         -fx-background-radius: 10 10 10 10;
+         -fx-border-radius: 10 10 10 10;
+ }
+ #btnSalida{
+       -fx-background-color: #E6FD74;
+         -fx-border-color: #FFFFFF;
+         -fx-border-width: 2;
+         -fx-text-fill: #FF3399;
+         -fx-font-family: "Georgia";
+         -fx-font-style: italic;
+         -fx-font-size: 15px;
+         -fx-background-radius: 10 10 10 10;
+         -fx-border-radius: 10 10 10 10;
+     
+ }
+ 
+ #AnchorPane{
+      -fx-background-color:#E0FFFF;
+ }
