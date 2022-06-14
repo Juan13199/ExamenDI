@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
+import javafx.scene.image.Image;
+import javafx.stage.StageStyle;
 
 /**
  * JavaFX App
@@ -31,10 +33,12 @@ public class App extends Application {
       
         //Indicamos el Titulo de la Ventana y el Estilo
         stage.setTitle("Parking-ES-EN");
-        
+       
+        stage.getIcons().add(new Image("com/mycompany/examendi/images/espana.png"));
+        stage.initStyle(StageStyle.DECORATED);
         
         //Seleccionamos la ventana y sus medidas
-        scene = new Scene(root, 1000, 700);
+        scene = new Scene(root, 800, 500);
         
          //Mostramos la vista
         stage.setScene(scene);

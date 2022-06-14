@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 /**
  * FXML Controller class
@@ -136,12 +137,111 @@ public class ParkingController implements Initializable {
         }
     }
 
+    
+     @FXML
+    private void seleccionar(MouseEvent event) {
+
+        // Obtengo la persona seleccionada
+        Cliente p = this.tbClientes.getSelectionModel().getSelectedItem();
+
+        // Sino es nula seteo los campos
+        if (p != null) {
+            this.txtNombre.setText(p.getNombre());
+            this.textApellido.setText(p.getApellido());
+            this.textPlaza.setText(p.getPlaza() + "");
+            this.textMatricula.setText(p.getMatricula());
+        }
+
+    }
     @FXML
     private void modificar(ActionEvent event) {
+        // Obtengo la persona seleccionada
+        Cliente p = this.tbClientes.getSelectionModel().getSelectedItem();
+
+        // Si la persona es nula, lanzo error
+        if (p == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Debes seleccionar una persona");
+            alert.showAndWait();
+        } else {
+
+            try {
+                // Obtengo los datos del formulario
+                String nombre = this.txtNombre.getText();
+                String apellidos = this.textApellido.getText();
+                int plaza = Integer.parseInt(this.textPlaza.getText());
+                String matricula = this.textMatricula.getText();
+
+                // Creo una persona
+                Cliente aux = new Cliente(nombre, apellidos, plaza, matricula);
+
+                // Compruebo si la persona esta en el lista
+                if (!this.clientes.contains(aux)) {
+
+                    // Modifico el objeto
+                    p.setNombre(aux.getNombre());
+                    p.setApellido(aux.getApellido());
+                    p.setPlaza(aux.getPlaza());
+                    p.setMatricula(aux.getMatricula());
+
+                    // Refresco la tabla
+                    this.tbClientes.refresh();
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Info");
+                    alert.setContentText("Persona modificada");
+                    alert.showAndWait();
+
+                } else {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setTitle("Error");
+                    alert.setContentText("La persona existe");
+                    alert.showAndWait();
+                }
+            } catch (NumberFormatException e) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Formato incorrecto");
+                alert.showAndWait();
+            }
+
+        }
     }
 
     @FXML
     private void salir(ActionEvent event) {
+        
+        // Obtengo la persona seleccionada
+        Cliente p = this.tbClientes.getSelectionModel().getSelectedItem();
+
+        // Si la persona es nula, lanzo error
+        if (p == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Debes seleccionar una persona");
+            alert.showAndWait();
+        } else {
+
+            // La elimino de la lista
+            this.clientes.remove(p);
+            // Refresco la lista
+            this.tbClientes.refresh();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setTitle("Info");
+            alert.setContentText("Persona eliminada");
+            alert.showAndWait();
+
+        }
     }
     
      public void LoadView(Locale locale) {
