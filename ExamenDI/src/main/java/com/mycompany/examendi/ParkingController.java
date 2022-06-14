@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -17,11 +19,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 /**
  * FXML Controller class
@@ -32,13 +37,15 @@ public class ParkingController implements Initializable {
 
 
     @FXML
-    private TableColumn<?, ?> colNombre;
+    private TableColumn colNombre;
     @FXML
-    private TableColumn<?, ?> colApellido;
+    private TableColumn colApellido;
     @FXML
-    private TableColumn<?, ?> colPlaza;
+    private TableColumn  colPlaza;
     @FXML
-    private TableColumn<?, ?> colMatricula;
+    private TableColumn  colMatricula;
+    
+     private ObservableList<Cliente> clientes;
     @FXML
     private Label nombre;
     @FXML
@@ -69,6 +76,8 @@ public class ParkingController implements Initializable {
     private Locale locale;
     private Stage stage;
     private Scene scene;
+    @FXML
+    private TableView<Cliente> tbClientes;
     /**
   
     /**
@@ -76,11 +85,55 @@ public class ParkingController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    clientes = FXCollections.observableArrayList();
+
+        this.colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+        this.colApellido.setCellValueFactory(new PropertyValueFactory("apellido"));
+        this.colPlaza.setCellValueFactory(new PropertyValueFactory("plaza"));
+        this.colMatricula.setCellValueFactory(new PropertyValueFactory("matricula"));
+    }   
     
     @FXML
     private void agregar(ActionEvent event) {
+         try {
+
+            // Obtengo los datos del formulario
+            String nombre = this.txtNombre.getText();
+            String apellidos = this.textApellido.getText();
+            int plaza = Integer.parseInt(this.textPlaza.getText());
+            String matricula = this.textMatricula.getText();
+
+            // Creo una persona
+            Cliente p = new Cliente(nombre, apellidos, plaza, matricula);
+
+            // Compruebo si el cliente esta en el lista
+            if (!this.clientes.contains(p)) {
+                // Lo añado a la lista
+                this.clientes.add(p);
+                // Seteo los items
+                this.tbClientes.setItems(clientes);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Info");
+                alert.setContentText("Persona añadida");
+                alert.showAndWait();
+            } else {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("La persona existe");
+                alert.showAndWait();
+            }
+        } catch (NumberFormatException e) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Formato incorrecto");
+            alert.showAndWait();
+        }
     }
 
     @FXML
